@@ -15,7 +15,7 @@
  {{-- <form action="{{url('/saveproduct')}}" method="POST" class="form-horizontal">
   --}}
 
- {!! Form::open(['action' => 'App\Http\Controllers\ProductController@store', 'method' => 'POST', 'class' => 'form-horizontal']) !!}
+ {!! Form::open(['action' => 'App\Http\Controllers\ProductController@store', 'method' => 'POST', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) !!}
  {{csrf_field()}}
     <div class="form-group">
         {{-- <label>Product</label> --}}
@@ -29,6 +29,16 @@
          --}}
         {{ Form::label('','Product Price') }}
         {{ Form::number('products_price', '',['placeholder' => 'Product Price', 'class' => 'form-control']) }}
+
+
+    </div>
+
+    <div class="form-group">
+        {{-- <label>Product Price</label>
+        <input type="text" name="products_price" placeholder="Product Price" class="form-control" required>
+         --}}
+        {{ Form::label('','Product Image') }}
+        {{ Form::file('products_image',[ 'class' => 'form-control']) }}
 
 
     </div>

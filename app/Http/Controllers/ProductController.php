@@ -44,17 +44,34 @@ class ProductController extends Controller
         //
         $this->validate($request, ['products_name' => 'required',
                                    'products_price' => 'required',
-                                   'products_description' => 'required']);
+                                   'products_description' => 'required',
+                                   'products_image' => 'image|nullable|max:1999']);
+       // print('This image is '.$request->file('products_image'));
+       $fileName = $request->file('products_image')->getClientOriginalName();
+       print('The original is '.$fileName);
+
+       echo '<pre></pre>';
+
+       $file = pathinfo($fileName, PATHINFO_FILENAME );
+
+       print('The file name is '.$file);
+       echo '<pre></pre>';
+       $ext = $request->file('products_image')->getClientOriginalExtension();
+       print('The original is '.$ext);
+
+       echo '<pre></pre>';
+       $fileStore = $fileName.'_'.time().'.'.$ext;
+       print('The filename to store is '.$fileStore);
 
        $product = new Product();
        $product->products_name = $request->products_name;
        $product->products_price = $request->products_price;
        $product->products_description = $request->products_description;
-       $product->save();
+       /*$product->save();
 
        Session::put('success','The '.$request->products_name.' has been added successfully');
 
-       return redirect('/products');
+       return redirect('/products');*/
     }
 
     /**
